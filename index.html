@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Music Element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="Parayathe-Vannen-MassTamilan.dev.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Floating Music Play/Pause Toggle -->
+    <button id="musicToggle" class="music-toggle" onclick="toggleMusic()">
+        🎵
+    </button>
+
+    <!-- Floating hearts -->
+    <div class="hearts">
+        <span>❤️</span>
+        <span>💕</span>
+        <span>❤️</span>
+        <span>💗</span>
+        <span>💖</span>
+        <span>💕</span>
+        <span>❤️</span>
+        <span>💗</span>
+    </div>
+
+    <main class="container">
+
+        <!-- Opening -->
+        <section class="opening">
+            <p class="small-text">A little something for you...</p>
+
+            <h1>Happy Birthday,<br><span>My Love ❤️</span></h1>
+
+            <div class="heart">♡</div>
+
+            <p class="intro">
+                Before you open everything else,
+                I want you to read this.
+            </p>
+
+            <button onclick="showLetter()">
+                Open Your Letter 💌
+            </button>
+        </section>
+
+
+        <!-- Letter -->
+        <section id="letter" class="letter-section">
+
+            <div class="letter">
+
+                <p class="date">For the girl who means the world to me...</p>
+
+                <h2>Dear Perkki ❤️</h2>
+
+                <p>
+                    Happy birthday to the most special person in my life.
+                </p>
+
+                <p>
+                    I honestly don't know where to start, because there
+                    are so many things I want to tell you.
+                    Nndakayo parayan und....
+                </p>
+
+                <p>
+                    But if there is one thing I want you to know today,
+                    it's how important you are to me and ,
+                    how happy I am that you became a part of my life.
+                    Ann when you said yes i never thought ni ithra important avum nikki nn.
+                    And to this day nikki ariyula why i love you nnn 
+                    oru choorul ariyatha rehasyam aayi ath nilkkunu...."
+                </p>
+
+                <p>
+                    Every conversation, every laugh, every little fights
+                    , every memory we have made together...
+                    they all mean more to me than you probably realize
+                    (Kore nne karayicitt okke nnd tto but koyappam illa adjust akki vida njn).
+                </p>
+
+                <p>
+                    You have become someone whose presence can completely
+                    change my day. Last week you asked "next sunday day etha nn ariyuo?".
+                    i said "nikki ariyula". Stupid girl how can i forget the most beautiful day
+                    of my life. It was 6th sept.. the day you said yes to me. Still remember that day,
+                    ni bike nnde pinnil irunn "nne ittit poyal nndalo nn paranj nulliyath.."
+                </p>
+                <P>
+                    You showed me when the person is right
+                    You make the time right. Before seeing you
+                    nikki ariyuleni i can love someone so much..
+            
+                </P>
+                <p>
+                    I hope you know how beautiful you are—
+                    Your smile, your little habits, the way you talk,
+                    boobies, Kumba, your seski legs....
+                    OH MY GOD... Kadich thinnan thonum ninne...
+                    Umma umma umma umwwwaaa.... on this day thonne umma for my
+                    glucose podi. Ini angot ulla every bday i wish u were near me.
+                </p>
+                
+
+
+
+                <p>
+                    I don't know what the future has planned for us,
+                    but I know one thing....vere aarelum eey kettiya
+                    sadhyayil njn wim kalakkum.. buhahaha... eey nnde mathrem ann
+                </p>
+
+                <p>
+                    On your birthday, I don't just wish you happiness.
+                    I wish you everything you've ever dreamed of.
+                    I hope you achieve everything you work for,
+                    nnit venam nikki hotwheels and mandi okke vangi thern...
+                    laugh more than you cry, and always have reasons
+                    to smile.
+                </p>
+
+                <p>
+                    And whenever life gets difficult,
+                    I hope you remember "Njan ille koode".
+                </p>
+
+                <p class="special">
+                    Thank you for showing me that i too can be loved. ❤️
+                </p>
+
+                <p>
+                    And now...
+                    oru karym koode.
+                </p>
+
+                <div class="signature">
+                    <p>With all my love,</p>
+                    <h3>Ummma ❤️</h3>
+                </div>
+
+            </div>
+
+
+            <!-- Continue button -->
+            <div class="continue-area">
+
+                <p>
+                    How much you know me nn onn test cheydalo? 👀
+                </p>
+
+                <a href="quiz.html" class="continue-button">
+                    Ready? 💖
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+    const music = document.getElementById("bgMusic");
+
+    function showLetter() {
+        const letter = document.getElementById("letter");
+
+        if (music) {
+            music.volume = 0.5;
+            music.play().then(() => {
+                localStorage.setItem("musicPlaying", "true");
+            }).catch(err => {
+                console.log("Audio play error:", err);
+            });
+        }
+
+        letter.classList.add("show");
+
+        setTimeout(() => {
+            letter.scrollIntoView({
+                behavior: "smooth"
+            });
+        }, 200);
+    }
+
+    function toggleMusic() {
+        const toggleBtn = document.getElementById("musicToggle");
+
+        if (music.paused) {
+            music.play();
+            localStorage.setItem("musicPlaying", "true");
+            toggleBtn.textContent = "🎵";
+        } else {
+            music.pause();
+            localStorage.setItem("musicPlaying", "false");
+            toggleBtn.textContent = "🔇";
+        }
+    }
+
+    if (music) {
+        // Continuously keep track of the current second
+        music.addEventListener("timeupdate", () => {
+            localStorage.setItem("musicTime", music.currentTime);
+        });
+    }
+</script>

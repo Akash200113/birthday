@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Quiz ❤️</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+
+<body>
+    <!-- Background Music (Continues from Letter) -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="Parayathe-Vannen-MassTamilan.dev.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+    <!-- =====================================
+         FLOATING HEARTS
+    ====================================== -->
+    <div class="floating-hearts">
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💗</span>
+        <span>❤️</span>
+        <span>💖</span>
+        <span>💕</span>
+        <span>❤️</span>
+    </div>
+
+    <!-- =====================================
+         MAIN CONTAINER
+    ====================================== -->
+    <main class="quiz-container">
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+        <header class="quiz-header">
+            <p class="mini-title">Orma okke onn test cheyatte...</p>
+            <h1>
+                How well do you<br>
+                <span>know us? ❤️</span>
+            </h1>
+            <p class="subtitle">
+                Let's see if you remember some of our little moments together.
+            </p>
+        </header>
+
+        <!-- =====================================
+             PROGRESS
+        ====================================== -->
+        <div class="progress-area">
+            <div class="progress-info">
+                <span id="questionNumber">Question 1 of 10</span>
+                <span id="score">Score: 0</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>
+        </div>
+
+        <!-- =====================================
+             QUIZ CARD
+        ====================================== -->
+        <section id="quizCard" class="quiz-card">
+
+            <!-- QUESTION IMAGE -->
+            <div id="questionImageContainer" class="question-image-container">
+                <img id="questionImage" src="" alt="Our memory">
+            </div>
+
+            <!-- QUESTION LABEL -->
+            <p class="question-label">QUESTION</p>
+
+            <!-- QUESTION -->
+            <h2 id="question">Loading...</h2>
+
+            <!-- ANSWERS -->
+            <div id="answers" class="answers"></div>
+
+            <!-- FEEDBACK -->
+            <p id="feedback" class="feedback"></p>
+
+            <!-- NEXT BUTTON -->
+            <button id="nextButton" class="next-button" onclick="nextQuestion()">
+                Next ❤️
+            </button>
+
+        </section>
+
+        <!-- =====================================
+             RESULT CARD
+        ====================================== -->
+        <section id="result" class="result-card" style="display: none;">
+
+            <div class="result-heart">❤️</div>
+
+            <p class="mini-title">Kaynu Kaynu</p>
+
+            <h2>
+                You scored
+                <span id="finalScore">0</span>
+                /
+                <span id="totalQuestions">10</span>
+            </h2>
+
+            <p id="resultMessage">]...</p>
+
+            <div class="result-line"></div>
+
+            <p class="final-text">
+                Scoril happy anno my cutiepie?.
+            </p>
+
+            <p class="final-text">
+                10 il 0 aayalum 10il 10 kittiyalum i Love U soooooooooooooooo much my jaan. ❤️
+            </p>
+            <p>Njn valya editer onnum alla .Life is soo busy now but for my girl 
+                nne kond pattuna pole oru video njn nndakind. i hope u will enjoy it </p>
+
+            <a href="https://youtube.com/shorts/WfZCjCCTKGc?si=Ai24MVsL1ej6IQZv" target="_blank" class="video-button" onclick="stopMusicAndOpen()">
+                Oru Last item koode 🎬
+            </a>
+
+        </section>
+
+    </main>
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+    <script>
+        function stopMusicAndOpen() {
+    const music = document.getElementById("bgMusic");
+    if (music) {
+        music.pause();
+        localStorage.removeItem("musicPlaying");
+        localStorage.removeItem("musicTime");
+    }
+}
+
+        /* =====================================
+           QUESTIONS
+        ====================================== */
+        const questions = [
+            {
+                
+                question: "When did i fall in love with you for the first time?",
+                answers: [
+                    "Freshers day ❤️",
+                    "Canteen ☕",
+                    "Beach 🌊",
+                    "Parking"
+                ],
+                correct: 2
+            },
+            {
+                
+                question: "My favourite moment with you ? 😂",
+                answers: [
+                    "Hickey thannath",
+                    "First outting 🏍️",
+                    "That quick risky kiss at the library 😘",
+                    "Museum"
+                ],
+                correct: 2
+            },
+            {
+                
+                question: "What do you think is my favourite thing about you?",
+                answers: [
+                    "Your Eyes ❤️",
+                    "Your Smile",
+                    "Your boobies",
+                    "Everything about you 🥹"
+                ],
+                correct: 3
+            },
+            {
+                image: "WhatsApp Image 2026-09-01 at 10.54.42 PM (2).jpeg",
+                question: "The date we first went out?",
+                answers: [
+                    "Sept 6th",
+                    "Sept 16th",
+                    "Sept 22nd",
+                    "Sept 19th"
+                ],
+                correct: 3
+            },
+            {
+                
+                question: "My fav pic of you?",
+                answers: [
+                    { image: "WhatsApp Image 2026-09-01 at 11.08.30 PM.jpeg" },
+                    { image: "WhatsApp Image 2026-09-01 at 10.49.48 PM.jpeg" },
+                    { image: "WhatsApp Image 2026-09-01 at 11.08.29 PM.jpeg" },
+                    { image: "WhatsApp Image 2026-09-01 at 10.54.42 PM.jpeg" }
+                ],
+                correct: 3
+            },
+            {
+                
+                question: "My fav dress of yours?",
+                answers: [
+                    { image: "WhatsApp Image 2026-09-01 at 11.08.26 PM.jpeg" },
+                    { image: "WhatsApp Image 2026-09-01 at 11.08.26 PM (1).jpeg" },
+                    { image: "WhatsApp Image 2026-09-01 at 11.08.27 PM (1).jpeg" },
+                    { image: "WhatsApp Image 2026-09-01 at 11.08.28 PM.jpeg" }
+                ],
+                correct: 0
+            },
+            {
+                question: "What is something that you do i love? ❤️",
+                answers: [
+                    "deshyam pidikunath 😡",
+                    "madiyil irikunath",
+                    "Kadikunath 😁",
+                    "Umma tharunath 💋"
+                ],
+                correct: 2
+            },
+            {
+                
+                question: "If I could relive one day with you with all the memory from the present, what would I choose?",
+                answers: [
+                    "Our first film together",
+                    "Our first outing 🏍️",
+                    "Our funniest day 😂",
+                    "The day i first saw you ❤️"
+                ],
+                correct: 3
+            },
+            {
+                image: "20260817_180433.jpg.jpeg",
+                question: "What is my favourite thing to do when we are together?",
+                answers: [
+                    "Holding hands ❤️",
+                    "Holding my stress relivers",
+                    "Kisses on the forhead",
+                    "All of the above 🥹❤️"
+                ],
+                correct: 3
+            },
+            {
+                
+                question: "Finaly... how much do i love you? ❤️",
+                answers: [
+                    "itherm",
+                    "ithermm",
+                    "ithermmmm ❤️",
+                    "ithermmmmmmmmmmmmmmmmmmmmmmmmmmmmmm 🥹❤️"
+                ],
+                correct: 3
+            }
+        ];
+
+        /* =====================================
+           VARIABLES
+        ====================================== */
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        /* =====================================
+           DOM ELEMENTS
+        ====================================== */
+        const questionElement = document.getElementById("question");
+        const imageElement = document.getElementById("questionImage");
+        const imageContainer = document.getElementById("questionImageContainer");
+        const answersElement = document.getElementById("answers");
+        const feedbackElement = document.getElementById("feedback");
+        const nextButton = document.getElementById("nextButton");
+        const progressElement = document.getElementById("progress");
+        const questionNumberElement = document.getElementById("questionNumber");
+        const scoreElement = document.getElementById("score");
+        const quizCard = document.getElementById("quizCard");
+        const resultCard = document.getElementById("result");
+
+        /* =====================================
+           FLOATING HEARTS EFFECT
+        ====================================== */
+        function createHearts() {
+            const container = document.querySelector(".floating-hearts");
+            if (!container) return;
+
+            const heart = document.createElement("span");
+            heart.textContent = "❤️";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 90 + "vw";
+            heart.style.bottom = "0px";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+            heart.style.animation = "floatUp 3s linear forwards";
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        /* =====================================
+           LOAD QUESTION
+        ====================================== */
+        function loadQuestion() {
+            answered = false;
+            const q = questions[currentQuestion];
+
+            /* Set Question Title */
+            questionElement.textContent = q.question;
+
+            /* Set Question Image */
+            if (q.image && q.image.trim() !== "") {
+                imageElement.src = q.image;
+                imageContainer.style.display = "block";
+            } else {
+                imageElement.src = "";
+                imageContainer.style.display = "none";
+            }
+
+            /* Update Indicators */
+            questionNumberElement.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            scoreElement.textContent = `Score: ${score}`;
+            progressElement.style.width = `${(currentQuestion / questions.length) * 100}%`;
+
+            /* Reset Answers and Feedback */
+            answersElement.innerHTML = "";
+            feedbackElement.textContent = "";
+            feedbackElement.className = "feedback";
+            nextButton.style.display = "none";
+
+            /* Generate Buttons */
+            q.answers.forEach((answer, index) => {
+                const button = document.createElement("button");
+                button.classList.add("answer");
+
+                if (typeof answer === "string") {
+                    button.textContent = answer;
+                } else if (answer.image) {
+                    button.classList.add("image-answer");
+                    const img = document.createElement("img");
+                    img.src = answer.image;
+                    img.alt = "Answer choice";
+                    img.classList.add("answer-image");
+
+                    img.onerror = function () {
+                        this.style.display = "none";
+                        button.innerHTML = "Image not found";
+                    };
+
+                    button.appendChild(img);
+                }
+
+                button.addEventListener("click", () => selectAnswer(index, button));
+                answersElement.appendChild(button);
+            });
+
+            /* Trigger Transition Animation */
+            quizCard.classList.remove("question-animation");
+            void quizCard.offsetWidth;
+            quizCard.classList.add("question-animation");
+        }
+
+        /* =====================================
+           SELECT ANSWER
+        ====================================== */
+        function selectAnswer(selectedIndex, selectedButton) {
+            if (answered) return;
+            answered = true;
+
+            const correctAnswer = questions[currentQuestion].correct;
+            const allAnswers = document.querySelectorAll(".answer");
+
+            allAnswers.forEach(answer => answer.disabled = true);
+
+            if (selectedIndex === correctAnswer) {
+                score++;
+                selectedButton.classList.add("correct");
+                feedbackElement.textContent = "Correct ❤️";
+                feedbackElement.classList.add("correct-feedback");
+                createHearts();
+            } else {
+                selectedButton.classList.add("wrong");
+                allAnswers[correctAnswer].classList.add("correct");
+                feedbackElement.textContent = "Thetti poyi 😌";
+                feedbackElement.classList.add("wrong-feedback");
+            }
+
+            scoreElement.textContent = `Score: ${score}`;
+            nextButton.style.display = "inline-block";
+        }
+
+        /* =====================================
+           NEXT QUESTION / RESULTS
+        ====================================== */
+        function nextQuestion() {
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizCard.style.display = "none";
+            resultCard.style.display = "block";
+
+            document.getElementById("finalScore").textContent = score;
+            document.getElementById("totalQuestions").textContent = questions.length;
+
+            const message = document.getElementById("resultMessage");
+            if (score === questions.length) {
+                message.textContent = "Figariiii! full correct akki lle 🥹❤️";
+            } else if (score >= questions.length / 2) {
+                message.textContent = "Ambadi jinjinjangadi! 🥹❤️";
+            } else {
+                message.textContent = "Orma kuravanalloo... but I still love you! 😂❤️";
+            }
+        }
+
+        /* =====================================
+           INITIALIZE ON LOAD & RESUME MUSIC
+        ====================================== */
+        window.addEventListener("DOMContentLoaded", () => {
+            loadQuestion();
+
+            const music = document.getElementById("bgMusic");
+            const savedTime = localStorage.getItem("musicTime");
+            const wasPlaying = localStorage.getItem("musicPlaying");
+
+            if (music && wasPlaying === "true") {
+                music.volume = 0.5;
+
+                if (savedTime) {
+                    music.currentTime = parseFloat(savedTime);
+                }
+
+                // 1. Attempt standard play
+                const playPromise = music.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // 2. Fallback: Browser blocked autoplay. 
+                        // Resume on first tap/click anywhere on the screen seamlessly.
+                        const resumeAudio = () => {
+                            music.play();
+                            document.removeEventListener("click", resumeAudio);
+                            document.removeEventListener("touchstart", resumeAudio);
+                        };
+
+                        document.addEventListener("click", resumeAudio);
+                        document.addEventListener("touchstart", resumeAudio);
+                    });
+                }
+            }
+
+            if (music) {
+                music.addEventListener("timeupdate", () => {
+                    localStorage.setItem("musicTime", music.currentTime);
+                });
+            }
+        });
+        
+
+    </script>
+</body>
+</html>
